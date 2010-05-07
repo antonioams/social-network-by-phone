@@ -1,0 +1,89 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="userForm">
+
+        <rich:panel>
+            <f:facet name="header">user</f:facet>
+
+            <s:decorate id="nameField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome</ui:define>
+                <h:inputText id="name" required="true"
+                             value="#{userHome.instance.name}"/>
+            </s:decorate>
+
+            <s:decorate id="fullNameField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome completo</ui:define>
+                <h:inputText id="fullName" required="true"
+                             value="#{userHome.instance.fullName}"/>
+            </s:decorate>
+
+            <s:decorate id="passwordField" template="layout/edit.xhtml">
+                <ui:define name="label">Senha</ui:define>
+                <h:inputSecret id="password" required="true"
+                             value="#{userHome.instance.password}"/>
+            </s:decorate>
+            
+            <s:decorate id="passwordConfirmField" template="layout/edit.xhtml">
+                <ui:define name="label">Senha de confirmação</ui:define>
+                <h:inputSecret id="passwordConfirm" required="true"
+                             value="#{userHome.instance.passwordConfirm}"/>
+            </s:decorate>
+            
+            <s:decorate id="phoneNumberField" template="layout/edit.xhtml">
+                <ui:define name="label">Número de telefone</ui:define>
+                <h:inputText id="phoneNumber" required="true"
+                             value="#{userHome.instance.phoneNumber}"/>
+            </s:decorate>
+            
+            <s:decorate id="twitterUsernameField" template="layout/edit.xhtml">
+                <ui:define name="label">Twitter login</ui:define>
+                <h:inputText id="twitterUsername" required="true"
+                             value="#{userHome.instance.twitterUsername}"/>
+            </s:decorate>
+
+            <s:decorate id="twitterPasswordField" template="layout/edit.xhtml">
+                <ui:define name="label">Twitter senha</ui:define>
+                <h:inputSecret id="twitterPassword" required="true"
+                             value="#{userHome.instance.twitterPassword}"/>
+            </s:decorate>
+
+            
+            <div style="clear:both"/>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{userHome.persist}"
+                       rendered="#{!userHome.managed}"/>
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{userHome.update}"
+                       rendered="#{userHome.managed}"/>
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{userHome.remove}"
+                      immediate="true"
+                       rendered="#{userHome.managed}"/>
+            <s:button propagation="end"
+                               id="cancel"
+                            value="Cancel"
+                             view="/userList.xhtml"/>
+        </div>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
